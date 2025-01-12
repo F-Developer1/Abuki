@@ -1,49 +1,25 @@
-// Animate the logo when on the home section
-document.addEventListener('scroll', () => {
-    const homeSection = document.getElementById('home');
-    const logoContainer = document.querySelector('.logo-container');
+document.addEventListener("DOMContentLoaded", () => {
+    const card = document.querySelector(".flip-card");
   
-    const homeSectionTop = homeSection.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
+    // Flip the card on click
+    card.addEventListener("click", () => {
+      card.classList.toggle("flipped");
+    });
   
-    if (homeSectionTop < windowHeight && homeSectionTop > 0) {
-      logoContainer.style.animation = 'pulse 2s infinite';
-    } else {
-      logoContainer.style.animation = 'none';
-    }
-  });
-  const hamburger = document.querySelector('.hamburger');
-  const navLinks = document.querySelector('.nav-links');
+    // Falling emojis
+    const emojis = ["🎂", "🎉", "🎁", "🎈", "🍰"];
+    setInterval(() => {
+      const emoji = document.createElement("div");
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.classList.add("emoji");
+      emoji.style.left = `${Math.random() * 100}vw`;
+      emoji.style.animationDuration = `${Math.random() * 3 + 2}s`;
+      document.body.appendChild(emoji);
   
-  // Toggle navbar visibility on hamburger click
-  hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
+      // Remove emoji after animation
+      emoji.addEventListener("animationend", () => {
+        emoji.remove();
+      });
+    }, 300);
   });
-   
-  // Scroll Animation for 'scroll-effect' Sections
-document.addEventListener('scroll', () => {
-  const scrollEffects = document.querySelectorAll('.scroll-effect');
-  const windowHeight = window.innerHeight;
-
-  scrollEffects.forEach((effect) => {
-    const elementTop = effect.getBoundingClientRect().top;
-
-    if (elementTop < windowHeight - 100) {
-      effect.classList.add('active');
-    }
-  });
-});
-// Expand/Collapse Private Contact Details
-const contactCards = document.querySelectorAll('.contact-card');
-
-contactCards.forEach(card => {
-  card.addEventListener('click', () => {
-    card.classList.toggle('expanded');
-    const content = card.querySelector('.card-content');
-    if (content.style.display === 'block') {
-      content.style.display = 'none';
-    } else {
-      content.style.display = 'block';
-    }
-  });
-});
+  
